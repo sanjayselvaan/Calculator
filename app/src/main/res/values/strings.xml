@@ -6,5 +6,6 @@
     <string name="div">DIV</string>
     <string name="first_number">First Number</string>
     <string name="second_number">Second Number</string>
+    <string name="no_result">No Result</string>
     <string name="reset">RESET</string>
 </resources>

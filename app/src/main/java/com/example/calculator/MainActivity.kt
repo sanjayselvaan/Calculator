@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             else {
-                println("hellooooo")
+                binding.tvResult.text= getString(R.string.no_result)
 
             }
         }
@@ -56,6 +56,10 @@ class MainActivity : AppCompatActivity() {
         }
         binding.btnDiv.setOnClickListener {
             intentGenerator(binding.btnDiv.text.toString())
+        }
+        binding.btnReset.setOnClickListener {
+            binding.layout2.visibility=View.GONE
+            binding.layout1.visibility=View.VISIBLE
         }
     }
 

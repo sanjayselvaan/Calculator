@@ -12,8 +12,12 @@ class MainActivity : AppCompatActivity() {
     private val fetchResultFromSecondActivityLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == RESULT_OK) {
-                binding.layout1.visibility= View.GONE
-                binding.layout2.visibility=View.VISIBLE
+                binding.tvResult.visibility=View.VISIBLE
+                binding.btnReset.visibility=View.VISIBLE
+                binding.btnAdd.visibility=View.GONE
+                binding.btnSub.visibility=View.GONE
+                binding.btnMul.visibility=View.GONE
+                binding.btnDiv.visibility=View.GONE
                 val intentForResult: Intent? = result.data
                 val firstNumber = intentForResult?.getIntExtra("firstNumber", 0)
                 val secondNumber = intentForResult?.getIntExtra("secondNumber", 0)
@@ -35,10 +39,6 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
-            else {
-                binding.tvResult.text= getString(R.string.no_result)
-
-            }
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,8 +58,13 @@ class MainActivity : AppCompatActivity() {
             intentGenerator(binding.btnDiv.text.toString())
         }
         binding.btnReset.setOnClickListener {
-            binding.layout2.visibility=View.GONE
-            binding.layout1.visibility=View.VISIBLE
+            binding.tvResult.visibility=View.GONE
+            binding.btnReset.visibility=View.GONE
+            binding.btnAdd.visibility=View.VISIBLE
+            binding.btnSub.visibility=View.VISIBLE
+            binding.btnMul.visibility=View.VISIBLE
+            binding.btnDiv.visibility=View.VISIBLE
+
         }
     }
 

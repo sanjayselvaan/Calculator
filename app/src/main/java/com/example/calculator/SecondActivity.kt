@@ -14,12 +14,14 @@ class SecondActivity : AppCompatActivity() {
         setContentView(binding.root)
         val btnTextFromIntent = intent.getStringExtra("operationName")
         binding.btnOperation.text = btnTextFromIntent
-
         binding.btnOperation.setOnClickListener {
             val textForFirstNumber = binding.EtFirstNumber.text.toString()
             val textForSecondNumber = binding.EtSecondNumber.text.toString()
             val btnOperationIntent = Intent(this, MainActivity::class.java)
-            if (textForFirstNumber.isNotEmpty() && textForSecondNumber.isNotEmpty()) {
+            if(btnTextFromIntent=="DIV" && textForSecondNumber.toInt()==0){
+                Toast.makeText(this,"Invalid, Can't divide by zero",Toast.LENGTH_SHORT).show()
+            }
+            else if (textForFirstNumber.isNotEmpty() && textForSecondNumber.isNotEmpty()) {
                 btnOperationIntent.putExtra("firstNumber", textForFirstNumber.toInt())
                 btnOperationIntent.putExtra("secondNumber", textForSecondNumber.toInt())
                 btnOperationIntent.putExtra("operationName", btnTextFromIntent)

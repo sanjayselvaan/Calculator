@@ -19,7 +19,7 @@ class SecondActivity : AppCompatActivity() {
             val textForSecondNumber = binding.EtSecondNumber.text.toString()
             val btnOperationIntent = Intent(this, MainActivity::class.java)
             if(btnTextFromIntent=="DIV" && textForSecondNumber.toInt()==0){
-                Toast.makeText(this,"Invalid, Can't divide by zero",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,getString(R.string.divide_by_zero_error),Toast.LENGTH_SHORT).show()
             }
             else if (textForFirstNumber.isNotEmpty() && textForSecondNumber.isNotEmpty()) {
                 btnOperationIntent.putExtra("firstNumber", textForFirstNumber.toInt())
@@ -29,7 +29,7 @@ class SecondActivity : AppCompatActivity() {
                 finish()
             }
             else {
-                Toast.makeText(this, "Enter both numbers", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,getString(R.string.enter_both_numbers_warning), Toast.LENGTH_SHORT).show()
             }
         }
     }

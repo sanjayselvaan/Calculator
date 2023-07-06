@@ -73,4 +73,5 @@ class MainActivity : AppCompatActivity() {
         btnForSecondActivityIntent.putExtra("operationName", btnString)
         fetchResultFromSecondActivityLauncher.launch(btnForSecondActivityIntent)
     }
+
 }

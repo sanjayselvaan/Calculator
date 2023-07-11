@@ -18,19 +18,28 @@ class SecondActivity : AppCompatActivity() {
             val textForFirstNumber = binding.EtFirstNumber.text.toString()
             val textForSecondNumber = binding.EtSecondNumber.text.toString()
             val btnOperationIntent = Intent(this, MainActivity::class.java)
-            if(btnTextFromIntent=="DIV" && textForSecondNumber.toInt()==0){
-                Toast.makeText(this,getString(R.string.divide_by_zero_error),Toast.LENGTH_SHORT).show()
-            }
-            else if (textForFirstNumber.isNotEmpty() && textForSecondNumber.isNotEmpty()) {
-                btnOperationIntent.putExtra("firstNumber", textForFirstNumber.toInt())
-                btnOperationIntent.putExtra("secondNumber", textForSecondNumber.toInt())
+//            if(btnTextFromIntent=="DIV" && textForSecondNumber.toInt()==0){
+//                Toast.makeText(this,getString(R.string.divide_by_zero_error),Toast.LENGTH_SHORT).show()
+//            }
+//            else if (textForFirstNumber.isNotEmpty() && textForSecondNumber.isNotEmpty()) {
+//                btnOperationIntent.putExtra("firstNumber", textForFirstNumber.toInt())
+//                btnOperationIntent.putExtra("secondNumber", textForSecondNumber.toInt())
+//                btnOperationIntent.putExtra("operationName", btnTextFromIntent)
+//                setResult(RESULT_OK, btnOperationIntent)
+//                finish()
+//            }
+            if (textForFirstNumber.isNotEmpty() && textForSecondNumber.isNotEmpty()) {
+                btnOperationIntent.putExtra("firstNumber", textForFirstNumber)
+                btnOperationIntent.putExtra("secondNumber", textForSecondNumber)
                 btnOperationIntent.putExtra("operationName", btnTextFromIntent)
                 setResult(RESULT_OK, btnOperationIntent)
                 finish()
             }
+
             else {
                 Toast.makeText(this,getString(R.string.enter_both_numbers_warning), Toast.LENGTH_SHORT).show()
             }
         }
     }
 }
+

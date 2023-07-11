@@ -19,25 +19,50 @@ class MainActivity : AppCompatActivity() {
                 binding.btnMul.visibility = View.GONE
                 binding.btnDiv.visibility = View.GONE
                 val intentForResult: Intent? = result.data
-                val firstNumber = intentForResult?.getIntExtra("firstNumber", 0)
-                val secondNumber = intentForResult?.getIntExtra("secondNumber", 0)
+                val firstNumberText = intentForResult?.getStringExtra("firstNumber")
+                val secondNumberText = intentForResult?.getStringExtra("secondNumber")
                 val operationName = intentForResult?.getStringExtra("operationName")
-                if (firstNumber != null && secondNumber != null) {
-                    when (operationName) {
-                        "ADD" -> {
-                            binding.tvResult.text = (firstNumber.plus(secondNumber).toString())
-                        }
+                if (firstNumberText != null && secondNumberText != null) {
+                    if (firstNumberText.contains(".")||secondNumberText.contains(".")) {
+                        val firstNumber=firstNumberText.toDouble()
+                        val secondNumber=secondNumberText.toDouble()
+                        when (operationName) {
+                            "ADD" -> {
+                                binding.tvResult.text = (firstNumber.plus(secondNumber).toString())
+                            }
 
-                        "SUB" -> {
-                            binding.tvResult.text = (firstNumber - secondNumber).toString()
-                        }
+                            "SUB" -> {
+                                binding.tvResult.text = (firstNumber - secondNumber).toString()
+                            }
 
-                        "MUL" -> {
-                            binding.tvResult.text = (firstNumber * secondNumber).toString()
-                        }
+                            "MUL" -> {
+                                binding.tvResult.text = (firstNumber * secondNumber).toString()
+                            }
 
-                        "DIV" -> {
-                            binding.tvResult.text = (firstNumber * secondNumber).toString()
+                            "DIV" -> {
+                                binding.tvResult.text = (firstNumber * secondNumber).toString()
+                            }
+                        }
+                    }
+                    else{
+                        val firstNumber=firstNumberText.toInt()
+                        val secondNumber=secondNumberText.toInt()
+                        when (operationName) {
+                            "ADD" -> {
+                                binding.tvResult.text = (firstNumber.plus(secondNumber).toString())
+                            }
+
+                            "SUB" -> {
+                                binding.tvResult.text = (firstNumber - secondNumber).toString()
+                            }
+
+                            "MUL" -> {
+                                binding.tvResult.text = (firstNumber * secondNumber).toString()
+                            }
+
+                            "DIV" -> {
+                                binding.tvResult.text = (firstNumber * secondNumber).toString()
+                            }
                         }
                     }
                 }

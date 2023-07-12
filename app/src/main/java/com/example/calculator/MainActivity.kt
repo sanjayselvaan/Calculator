@@ -19,28 +19,8 @@ class MainActivity : AppCompatActivity() {
                 binding.btnMul.visibility = View.GONE
                 binding.btnDiv.visibility = View.GONE
                 val intentForResult: Intent? = result.data
-                val firstNumber = intentForResult?.getIntExtra("firstNumber", 0)
-                val secondNumber = intentForResult?.getIntExtra("secondNumber", 0)
-                val operationName = intentForResult?.getStringExtra("operationName")
-                if (firstNumber != null && secondNumber != null) {
-                    when (operationName) {
-                        "ADD" -> {
-                            binding.tvResult.text = (firstNumber.plus(secondNumber).toString())
-                        }
-
-                        "SUB" -> {
-                            binding.tvResult.text = (firstNumber - secondNumber).toString()
-                        }
-
-                        "MUL" -> {
-                            binding.tvResult.text = (firstNumber * secondNumber).toString()
-                        }
-
-                        "DIV" -> {
-                            binding.tvResult.text = (firstNumber * secondNumber).toString()
-                        }
-                    }
-                }
+                val resultText = intentForResult?.getStringExtra("Result")
+                binding.tvResult.text=resultText
             }
         }
 
@@ -67,10 +47,10 @@ class MainActivity : AppCompatActivity() {
             binding.btnSub.visibility = View.VISIBLE
             binding.btnMul.visibility = View.VISIBLE
             binding.btnDiv.visibility = View.VISIBLE
-            binding.tvResult.text = null
+            binding.tvResult.text=null
 
         }
-        if (savedInstanceState?.getString("Result")?.isNotEmpty() != null) {
+        if (savedInstanceState?.getString("Result")?.isNotEmpty()!=null) {
             binding.tvResult.visibility = View.VISIBLE
             binding.btnReset.visibility = View.VISIBLE
             binding.btnAdd.visibility = View.GONE

@@ -14,23 +14,58 @@ class SecondActivity : AppCompatActivity() {
         setContentView(binding.root)
         val btnTextFromIntent = intent.getStringExtra("operationName")
         binding.btnOperation.text = btnTextFromIntent
+
         binding.btnOperation.setOnClickListener {
-            val textForFirstNumber = binding.EtFirstNumber.text.toString()
-            val textForSecondNumber = binding.EtSecondNumber.text.toString()
-            val btnOperationIntent = Intent(this, MainActivity::class.java)
-            if(btnTextFromIntent=="DIV" && textForSecondNumber.toInt()==0){
-                Toast.makeText(this,getString(R.string.divide_by_zero_error),Toast.LENGTH_SHORT).show()
-            }
-            else if (textForFirstNumber.isNotEmpty() && textForSecondNumber.isNotEmpty()) {
-                btnOperationIntent.putExtra("firstNumber", textForFirstNumber.toInt())
-                btnOperationIntent.putExtra("secondNumber", textForSecondNumber.toInt())
-                btnOperationIntent.putExtra("operationName", btnTextFromIntent)
-                setResult(RESULT_OK, btnOperationIntent)
-                finish()
-            }
-            else {
-                Toast.makeText(this,getString(R.string.enter_both_numbers_warning), Toast.LENGTH_SHORT).show()
+            val textForFirstNumber = binding.EtFirstNumber.text
+            val textForSecondNumber = binding.EtSecondNumber.text
+            val resultString: String
+            if (textForFirstNumber.isNotEmpty() && textForSecondNumber.isNotEmpty()) {
+                val firstNumber = textForFirstNumber.toString().toInt()
+                val secondNumber = textForSecondNumber.toString().toInt()
+                if (secondNumber == 0 && btnTextFromIntent == "DIV") {
+                    Toast.makeText(
+                        this,
+                        getString(R.string.divide_by_zero_error),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else {
+                    when (btnTextFromIntent) {
+                        "ADD" -> {
+                            resultString = (firstNumber.plus(secondNumber).toString())
+                            resultIntentGenerator(resultString)
+                        }
+
+                        "SUB" -> {
+                            resultString = (firstNumber - secondNumber).toString()
+                            resultIntentGenerator(resultString)
+                        }
+
+                        "MUL" -> {
+                            resultString = (firstNumber * secondNumber).toString()
+                            resultIntentGenerator(resultString)
+
+                        }
+
+                        "DIV" -> {
+                            resultString = (firstNumber / secondNumber).toString()
+                            resultIntentGenerator(resultString)
+                        }
+                    }
+                }
+            } else {
+                Toast.makeText(
+                    this,
+                    getString(R.string.enter_both_numbers_warning),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
+    }
+
+    private fun resultIntentGenerator(resultString: String) {
+        val btnOperationIntent = Intent(this, MainActivity::class.java)
+        btnOperationIntent.putExtra("Result", resultString)
+        setResult(RESULT_OK, btnOperationIntent)
+        finish()
     }
 }

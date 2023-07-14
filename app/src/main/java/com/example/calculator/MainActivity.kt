@@ -95,11 +95,9 @@ class MainActivity : AppCompatActivity(), OnClickListener {
     override fun onBackPressed() {
         if(binding.resultLayout.visibility == View.VISIBLE){
             binding.btnReset.performClick()
-            Log.d("test","inside if")
 
         }
         else{
-            Log.d("test","inside else")
             super.onBackPressed()
         }
     }

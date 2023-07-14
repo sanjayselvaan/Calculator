@@ -3,6 +3,7 @@ package com.example.calculator
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.Toast
 import com.example.calculator.databinding.ActivitySecondBinding
 
@@ -14,7 +15,8 @@ class SecondActivity : AppCompatActivity() {
         setContentView(binding.root)
         val btnTextFromIntent = intent.getStringExtra("operationName")
         binding.btnOperation.text = btnTextFromIntent
-
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title=btnTextFromIntent
         binding.btnOperation.setOnClickListener {
             val textForFirstNumber = binding.EtFirstNumber.text
             val textForSecondNumber = binding.EtSecondNumber.text
@@ -31,24 +33,24 @@ class SecondActivity : AppCompatActivity() {
                 } else {
                     when (btnTextFromIntent) {
                         "ADD" -> {
-                            resultString = (firstNumber.plus(secondNumber).toString())
-                            resultIntentGenerator(resultString)
+                            resultString = (firstNumber + secondNumber).toString()
+                            setResult(resultString)
                         }
 
                         "SUB" -> {
                             resultString = (firstNumber - secondNumber).toString()
-                            resultIntentGenerator(resultString)
+                            setResult(resultString)
                         }
 
                         "MUL" -> {
                             resultString = (firstNumber * secondNumber).toString()
-                            resultIntentGenerator(resultString)
+                            setResult(resultString)
 
                         }
 
                         "DIV" -> {
                             resultString = (firstNumber / secondNumber).toString()
-                            resultIntentGenerator(resultString)
+                            setResult(resultString)
                         }
                     }
                 }
@@ -62,10 +64,19 @@ class SecondActivity : AppCompatActivity() {
         }
     }
 
-    private fun resultIntentGenerator(resultString: String) {
+    private fun setResult(resultString: String) {
         val btnOperationIntent = Intent(this, MainActivity::class.java)
         btnOperationIntent.putExtra("Result", resultString)
         setResult(RESULT_OK, btnOperationIntent)
         finish()
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
